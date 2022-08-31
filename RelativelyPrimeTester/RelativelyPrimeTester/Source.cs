@@ -17,21 +17,17 @@ namespace RelativelyPrimeTester
     {
         public static void Tester()
         {
-            ProcessResult pr1 = Utils.RunProcess(0, 2);
-            ProcessResult pr2 = Utils.RunProcess("1");
-            ProcessResult pr3 = Utils.RunProcess("1 s");
-            ProcessResult pr4 = Utils.RunProcess("s");
-            ProcessResult pr5 = Utils.RunProcess("");
-            ProcessResult pr6 = Utils.RunProcess("12 12");
-            ProcessResult pr7 = Utils.RunProcess("12 12 5");
-            ProcessResult pr8 = Utils.RunProcess("99999999999999999999999999 12");
+            //TODO: Edit the code here to test the Relatively Prime program for errors. There are a minimum number of errors you need to find.
 
-            int t = 0;
+            ProcessResult example1 = Utils.RunProcess(24, 32);
+            ProcessResult example2 = Utils.RunProcess("24 32");//In this format, numbers must be space separated.
+
+            //Hint: Use breakpoints to check the values of variables mid-runtime and keep checking the console.
         }
 
         public static void ExhaustiveTest()
         {
-            
+            //TODO: Write your exhaustive test here. Don't worry about timing it, there are functions in place that will time it for you.
         }
     }
 }
