@@ -12,9 +12,9 @@ namespace RelativelyPrimeTester
 {
     public class Program
     {
-        private static readonly int EXHAUSTIVE_CHECKS = 200;
+        private static readonly int EXHAUSTIVE_CHECKS = 50;
         private static bool[] Crashes { get; set; } = new bool[0b0110];
-        private static bool[][] ExhaustiveTestCheck { get; set; } = new bool[0b11001000][];
+        private static bool[][] ExhaustiveTestCheck { get; set; } = new bool[0b0110010][];
         private readonly static byte MIN_CRASHES_REQUIRED = 5;
         private readonly static byte MAX_SCORE = 15;
 
@@ -49,7 +49,7 @@ namespace RelativelyPrimeTester
             stopWatch.Stop();
             // Get the elapsed time as a TimeSpan value.
             TimeSpan ts = stopWatch.Elapsed;
-            Console.WriteLine("Exhaustive test took " + String.Format("{0:00}.{1:00}", ts.Seconds, ts.Milliseconds / 10) + " seconds.");
+            Console.WriteLine("Exhaustive test took " + String.Format("{0:00}.{1:00}", ts.TotalSeconds, ts.Milliseconds / 10) + " seconds.");
 
             Console.WriteLine("Done testing.\n\nCalculating grade...");
 
@@ -96,15 +96,14 @@ namespace RelativelyPrimeTester
 
         public static void NumChecked(int num1, int num2)
         {
-            if (num1 + EXHAUSTIVE_CHECKS/2 < 0 || (int.MaxValue - num1 > EXHAUSTIVE_CHECKS/2 && num1 + EXHAUSTIVE_CHECKS/2 > EXHAUSTIVE_CHECKS)
-                || num2 + EXHAUSTIVE_CHECKS / 2 < 0 || (int.MaxValue - num2 > EXHAUSTIVE_CHECKS / 2 && num2 + EXHAUSTIVE_CHECKS / 2 > EXHAUSTIVE_CHECKS))
+            if (num1 > EXHAUSTIVE_CHECKS || num2 > EXHAUSTIVE_CHECKS || num1 < 0 || num2 < 0)
             {
                 return;
             }
 
             if (ExhaustiveTestCheck[num1] == null)
             {
-                ExhaustiveTestCheck[num1] = new bool[0b11001000];
+                ExhaustiveTestCheck[num1] = new bool[0b0110010];
             }
 
             ExhaustiveTestCheck[num1][num2] = true;

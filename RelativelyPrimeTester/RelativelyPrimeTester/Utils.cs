@@ -75,6 +75,15 @@ namespace RelativelyPrimeTester
 
         public static bool IsCoPrime(int val1, int val2)
         {
+            //Can't be coprime if one is positive and one is negative
+            if ((val1 < 0 && val2 > 0) || val2 > 0 && val1 < 0)
+            {
+                return false;
+            }
+
+            val1 = Math.Abs(val1);
+            val2 = Math.Abs(val2);
+
             return (GCD(val1, val2) == 1) ? true : false;
         }
 

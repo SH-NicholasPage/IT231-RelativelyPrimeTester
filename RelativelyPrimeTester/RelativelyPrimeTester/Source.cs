@@ -27,7 +27,11 @@ namespace RelativelyPrimeTester
 
         public static void ExhaustiveTest()
         {
+            int logicErrors = 0;
+
             //TODO: Write your exhaustive test here. Don't worry about timing it, there are functions in place that will time it for you.
+
+            Console.WriteLine("Logic errors found: " + logicErrors);
         }
     }
 }
