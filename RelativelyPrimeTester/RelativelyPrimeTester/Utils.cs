@@ -3,11 +3,7 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static RelativelyPrimeTester.Program;
 
 namespace RelativelyPrimeTester
@@ -53,7 +49,18 @@ namespace RelativelyPrimeTester
             }
 
             Process process = new Process();
-            process.StartInfo.FileName = "RelativelyPrime/RelativelyPrime.exe";
+            if (OperatingSystem.IsWindows())
+            {
+                process.StartInfo.FileName = "RelativelyPrime/Win/RelativelyPrime.exe";
+            }
+            else if(OperatingSystem.IsLinux())
+            {
+                process.StartInfo.FileName = "RelativelyPrime/Linux/RelativelyPrime";
+            }
+            else if(OperatingSystem.IsMacOS())
+            {
+                process.StartInfo.FileName = "RelativelyPrime/macOS/RelativelyPrime.app";
+            }
             process.StartInfo.Arguments = val1 + " " + val2;
             process.Start();
             process.WaitForExit();
