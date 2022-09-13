@@ -83,7 +83,7 @@ namespace RelativelyPrimeTester
 
             if (exhaustiveChecksRan < exhaustiveTestsExpectedToBeRun)
             {
-                Console.WriteLine("Exhaustive check was not fully exhaustive. Each combination of numbers from 0 " + EXHAUSTIVE_CHECKS 
+                Console.WriteLine("Exhaustive check was not fully exhaustive. Each combination of numbers from 0-" + EXHAUSTIVE_CHECKS 
                     + " must be used.");
             }
 
