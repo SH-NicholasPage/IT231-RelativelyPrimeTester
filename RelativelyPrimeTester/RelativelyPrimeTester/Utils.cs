@@ -53,7 +53,7 @@ namespace RelativelyPrimeTester
             }
 
             Process process = new Process();
-            process.StartInfo.FileName = "RelativelyPrime/RelativelyPrime.exe";
+            process.StartInfo.FileName = "RelativelyPrime/Win/RelativelyPrime.exe";
             process.StartInfo.Arguments = val1 + " " + val2;
             process.Start();
             process.WaitForExit();
