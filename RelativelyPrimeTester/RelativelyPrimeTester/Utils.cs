@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using static RelativelyPrimeTester.Program;
@@ -53,7 +54,18 @@ namespace RelativelyPrimeTester
             }
 
             Process process = new Process();
-            process.StartInfo.FileName = "RelativelyPrime/Win/RelativelyPrime.exe";
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                process.StartInfo.FileName = "RelativelyPrime/Win/RelativelyPrime.exe";
+            }
+            else if(RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                process.StartInfo.FileName = "RelativelyPrime/Linux/RelativelyPrime";
+            }
+            else if(RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                process.StartInfo.FileName = "RelativelyPrime/Linux/RelativelyPrime.app";
+            }
             process.StartInfo.Arguments = val1 + " " + val2;
             process.Start();
             process.WaitForExit();
