@@ -111,7 +111,14 @@ namespace RelativelyPrimeTester
 
         public static void RecieveResult(int resultCode)
         {
-            Crashes[Math.Abs(resultCode) - 1] = true;
+            if (resultCode < 0)
+            {
+                Crashes[Math.Abs(resultCode) - 1] = true;
+            }
+            else
+            {
+                Crashes[resultCode - 11] = true;
+            }
         }
     }
 }

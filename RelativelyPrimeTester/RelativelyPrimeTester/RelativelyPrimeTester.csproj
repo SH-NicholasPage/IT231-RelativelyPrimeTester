@@ -19,10 +19,4 @@
 	</None>
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="RelativelyPrime\macOS\RelativelyPrime.app\Contents\MonoBundle\runtimeconfig.bin">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

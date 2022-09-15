@@ -66,7 +66,7 @@ namespace RelativelyPrimeTester
             process.Start();
             process.WaitForExit();
 
-            if (process.ExitCode < 0)
+            if (process.ExitCode < 0 || process.ExitCode > 10)//Backwards compatible change. Delete negatives next semester
             {
                 Program.RecieveResult(process.ExitCode);
                 Console.WriteLine("Relatively Prime application crashed!");
