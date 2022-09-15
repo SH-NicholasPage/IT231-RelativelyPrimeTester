@@ -59,7 +59,7 @@ namespace RelativelyPrimeTester
             }
             else if(OperatingSystem.IsMacOS())
             {
-                process.StartInfo.FileName = "RelativelyPrime/macOS/RelativelyPrime.app";
+                process.StartInfo.FileName = "RelativelyPrime/macOS/RelativelyPrime";
                 process.StartInfo.UseShellExecute = true;
             }
             process.StartInfo.Arguments = val1 + " " + val2;
