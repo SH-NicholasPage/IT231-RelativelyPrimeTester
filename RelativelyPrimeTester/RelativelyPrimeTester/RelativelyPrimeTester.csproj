@@ -19,8 +19,4 @@
 	</None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="RelativelyPrime\macOS\Obfuscate\" />
-  </ItemGroup>
-
 </Project>

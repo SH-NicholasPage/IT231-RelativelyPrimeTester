@@ -39,101 +39,81 @@ namespace RelativelyPrimeTester
 
         public static ProcessResult RunProcess(String? val1 = null, String? val2 = null)
         {
-            if(OperatingSystem.IsMacOS() == true)
-            {
-                return RunProcessMac(val1, val2);
-            }
-
             int num1 = int.MinValue;
             int num2 = int.MinValue;
 
             int.TryParse(val1, out num1);
             int.TryParse(val2, out num2);
 
-            if (num1 != int.MinValue && num2 != int.MinValue)
+            if (val1 != null && val2 != null && num1 != int.MinValue && num2 != int.MinValue)
             {
                 Program.NumChecked(num1, num2);
             }
 
-            bool mute = false;
+            bool mute = (processRan >= MUTE_OUTPUT_AFTER_X_RUNS) ? true : false;
 
-            if (processRan > MUTE_OUTPUT_AFTER_X_RUNS)
-            {
-                mute = true;
-            }
-            else
+            if (processRan < MUTE_OUTPUT_AFTER_X_RUNS)
             {
                 processRan++;
             }
 
-            Process process = new Process();
-            if (OperatingSystem.IsWindows())
+            ProcessResult result;
+
+            if (OperatingSystem.IsMacOS())//MacOS hosts only
             {
-                process.StartInfo.FileName = "RelativelyPrime/Win/RelativelyPrime.exe";
+                int returnCode = g.MainEmu(new String[] { val1!, val2! });
+
+                if (returnCode > 10)//Crashed
+                {
+                    Program.RecieveResult(returnCode);
+                    if (mute == false)
+                    {
+                        Console.WriteLine("Relatively Prime application crashed!");
+                    }
+                    result = ProcessResult.Crashed;
+                }
+                else
+                {
+                    result = (ProcessResult)returnCode;
+                }
             }
-            else if(OperatingSystem.IsLinux())
+            else//Windows and Linux OS
             {
-                process.StartInfo.FileName = "RelativelyPrime/Linux/RelativelyPrime";
-            }
+                Process process = new Process();
+                if (OperatingSystem.IsWindows())
+                {
+                    process.StartInfo.FileName = "RelativelyPrime/Win/RelativelyPrime.exe";
+                }
+                else if (OperatingSystem.IsLinux())
+                {
+                    process.StartInfo.FileName = "RelativelyPrime/Linux/RelativelyPrime";
+                }
 
-            process.StartInfo.Arguments = val1 + " " + val2;
-            process.Start();
-            process.WaitForExit();
+                process.StartInfo.Arguments = val1 + " " + val2;
+                process.Start();
+                process.WaitForExit();
 
-            if (process.ExitCode < 0 || process.ExitCode > 10)//Backwards compatible change. Delete negatives next semester
-            {
-                Program.RecieveResult(process.ExitCode);
-                Console.WriteLine("Relatively Prime application crashed!");
-                return ProcessResult.Crashed;
-            }
-
-            if (mute == false)
-            {
-                Console.WriteLine("Relatively Prime application executed without issue. Comnination was reported as " + ((process.ExitCode == 1) ? " coprime." : "not coprime."));
-            }
-
-            return (ProcessResult)process.ExitCode;
-        }
-
-        public static ProcessResult RunProcessMac(String? val1 = null, String? val2 = null)
-        {
-            int num1 = int.MinValue;
-            int num2 = int.MinValue;
-
-            int.TryParse(val1, out num1);
-            int.TryParse(val2, out num2);
-
-            if (num1 != int.MinValue && num2 != int.MinValue)
-            {
-                Program.NumChecked(num1, num2);
-            }
-
-            bool mute = false;
-
-            if (processRan > MUTE_OUTPUT_AFTER_X_RUNS)
-            {
-                mute = true;
-            }
-            else
-            {
-                processRan++;
+                if (process.ExitCode < 0 || process.ExitCode > 10)//Backwards compatible change. Delete negatives next semester//Crashed
+                {
+                    Program.RecieveResult(process.ExitCode);
+                    if (mute == false)
+                    {
+                        Console.WriteLine("Relatively Prime application crashed!");
+                    }
+                    result = ProcessResult.Crashed;
+                }
+                else
+                {
+                    result = (ProcessResult)process.ExitCode;
+                }
             }
 
-            int returnCode = g.MainEmu(new String[] { val1, val2 });
-
-            if (returnCode < 0 || returnCode > 10)//Backwards compatible change. Delete negatives next semester
+            if (result != ProcessResult.Crashed && mute == false)
             {
-                Program.RecieveResult(returnCode);
-                Console.WriteLine("Relatively Prime application crashed!");
-                return ProcessResult.Crashed;
+                Console.WriteLine("Relatively Prime application executed without issue. Comnination was reported as " + ((result == ProcessResult.CoPrime) ? " coprime." : "not coprime."));
             }
 
-            if (mute == false)
-            {
-                Console.WriteLine("Relatively Prime application executed without issue. Comnination was reported as " + ((returnCode == 1) ? " coprime." : "not coprime."));
-            }
-
-            return (ProcessResult)returnCode;
+            return result;
         }
 
         public static bool IsCoPrime(int val1, int val2)
