@@ -12,9 +12,9 @@ namespace RelativelyPrimeTester
 {
     public class Program
     {
-        private static readonly int EXHAUSTIVE_CHECKS = 50;
+        private static readonly int EXHAUSTIVE_CHECKS = 51;//51 to account for 0-50
         private static bool[] Crashes { get; set; } = new bool[0b0110];
-        private static bool[][] ExhaustiveTestCheck { get; set; } = new bool[0b0110010][];
+        private static bool[][] ExhaustiveTestCheck { get; set; } = new bool[0b0110011][];
         private readonly static byte MIN_CRASHES_REQUIRED = 5;
         private readonly static byte MAX_SCORE = 15;
 
@@ -96,14 +96,14 @@ namespace RelativelyPrimeTester
 
         public static void NumChecked(int num1, int num2)
         {
-            if (num1 > EXHAUSTIVE_CHECKS || num2 > EXHAUSTIVE_CHECKS || num1 < 0 || num2 < 0)
+            if (num1 >= EXHAUSTIVE_CHECKS || num2 >= EXHAUSTIVE_CHECKS || num1 < 0 || num2 < 0)
             {
                 return;
             }
 
             if (ExhaustiveTestCheck[num1] == null)
             {
-                ExhaustiveTestCheck[num1] = new bool[0b0110010];
+                ExhaustiveTestCheck[num1] = new bool[0b0110011];
             }
 
             ExhaustiveTestCheck[num1][num2] = true;

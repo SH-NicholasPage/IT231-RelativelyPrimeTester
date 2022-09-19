@@ -24,6 +24,18 @@ namespace RelativelyPrimeTester
             return RunProcess(num1.ToString(), num2.ToString());
         }
 
+        public static ProcessResult RunProcess(String val)
+        {
+            if(val.Split().Length >= 2)
+            {
+                return RunProcess(val.Split()[0].Trim(), val.Split()[1].Trim());
+            }
+            else
+            {
+                return RunProcess(val);
+            }
+        }
+
         public static ProcessResult RunProcess(String? val1 = null, String? val2 = null)
         {
             int num1 = int.MinValue;
