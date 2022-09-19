@@ -2,6 +2,7 @@
  * You can add other methods to this file if you would like, but do not modify existing methods.
  */
 
+using RelativelyPrime;
 using System;
 using System.Diagnostics;
 using static RelativelyPrimeTester.Program;
@@ -32,12 +33,17 @@ namespace RelativelyPrimeTester
             }
             else
             {
-                return RunProcess(val);
+                return RunProcess(val, null);
             }
         }
 
         public static ProcessResult RunProcess(String? val1 = null, String? val2 = null)
         {
+            if(OperatingSystem.IsMacOS() == true)
+            {
+                return RunProcessMac(val1, val2);
+            }
+
             int num1 = int.MinValue;
             int num2 = int.MinValue;
 
@@ -69,11 +75,7 @@ namespace RelativelyPrimeTester
             {
                 process.StartInfo.FileName = "RelativelyPrime/Linux/RelativelyPrime";
             }
-            else if(OperatingSystem.IsMacOS())
-            {
-                process.StartInfo.FileName = "RelativelyPrime/macOS/RelativelyPrime";
-                process.StartInfo.UseShellExecute = true;
-            }
+
             process.StartInfo.Arguments = val1 + " " + val2;
             process.Start();
             process.WaitForExit();
@@ -91,6 +93,47 @@ namespace RelativelyPrimeTester
             }
 
             return (ProcessResult)process.ExitCode;
+        }
+
+        public static ProcessResult RunProcessMac(String? val1 = null, String? val2 = null)
+        {
+            int num1 = int.MinValue;
+            int num2 = int.MinValue;
+
+            int.TryParse(val1, out num1);
+            int.TryParse(val2, out num2);
+
+            if (num1 != int.MinValue && num2 != int.MinValue)
+            {
+                Program.NumChecked(num1, num2);
+            }
+
+            bool mute = false;
+
+            if (processRan > MUTE_OUTPUT_AFTER_X_RUNS)
+            {
+                mute = true;
+            }
+            else
+            {
+                processRan++;
+            }
+
+            int returnCode = g.MainEmu(new String[] { val1, val2 });
+
+            if (returnCode < 0 || returnCode > 10)//Backwards compatible change. Delete negatives next semester
+            {
+                Program.RecieveResult(returnCode);
+                Console.WriteLine("Relatively Prime application crashed!");
+                return ProcessResult.Crashed;
+            }
+
+            if (mute == false)
+            {
+                Console.WriteLine("Relatively Prime application executed without issue. Comnination was reported as " + ((returnCode == 1) ? " coprime." : "not coprime."));
+            }
+
+            return (ProcessResult)returnCode;
         }
 
         public static bool IsCoPrime(int val1, int val2)
