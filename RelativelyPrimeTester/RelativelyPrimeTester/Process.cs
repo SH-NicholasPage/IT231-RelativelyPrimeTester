@@ -81,7 +81,7 @@ namespace RelativelyPrimeTester
                 int num2 = int.MinValue;
 
                 int.TryParse(args[0], out num1);
-                int.TryParse(args[0], out num2);
+                int.TryParse(args[1], out num2);
 
                 if (num1 != int.MinValue && num2 != int.MinValue)
                 {
@@ -90,6 +90,12 @@ namespace RelativelyPrimeTester
             }
 
             bool mute = (processRan >= Process.MUTE_OUTPUT_AFTER_X_RUNS) ? true : false;
+
+            if(processRan == Process.MUTE_OUTPUT_AFTER_X_RUNS)
+            {
+                Console.WriteLine("Muting output to reduce IO cost...");
+                processRan++;
+            }
 
             if (processRan < Process.MUTE_OUTPUT_AFTER_X_RUNS)
             {
@@ -149,7 +155,7 @@ namespace RelativelyPrimeTester
 
             if (result != ProcessResult.Crashed && mute == false)
             {
-                Console.WriteLine("Relatively Prime application executed without issue. Comnination was reported as " + ((result == ProcessResult.CoPrime) ? " coprime." : "not coprime."));
+                Console.WriteLine("Relatively Prime application executed without issue. Comnination was reported as " + ((result == ProcessResult.CoPrime) ? "coprime." : "not coprime."));
             }
 
             return result;

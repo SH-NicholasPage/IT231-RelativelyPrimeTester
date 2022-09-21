@@ -16,18 +16,18 @@ namespace RelativelyPrimeTester
         /// <summary>
         /// Accurately determines what is coprime and returns true if coprime, false if not coprime.
         /// </summary>
-        public static bool IsCoPrime(int val1, int val2)
+        public static ProcessResult IsCoPrime(int val1, int val2)
         {
             //Can't be coprime if one is positive and one is negative
             if ((val1 < 0 && val2 > 0) || val2 > 0 && val1 < 0)
             {
-                return false;
+                return ProcessResult.NotCoPrime;
             }
 
             val1 = Math.Abs(val1);
             val2 = Math.Abs(val2);
 
-            return (GCD(val1, val2) == 1) ? true : false;
+            return (GCD(val1, val2) == 1) ? ProcessResult.CoPrime : ProcessResult.NotCoPrime;
         }
 
         //Recursive
