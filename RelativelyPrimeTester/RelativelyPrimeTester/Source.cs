@@ -19,8 +19,8 @@ namespace RelativelyPrimeTester
         {
             //TODO: Edit the code here to test the Relatively Prime program for errors. There are a minimum number of errors you need to find.
 
-            ProcessResult example1 = Utils.RunProcess(24, 32);
-            ProcessResult example2 = Utils.RunProcess("24 32");//In this format, numbers must be space separated.
+            ProcessResult example1 = Process.Run(24, 32);
+            ProcessResult example2 = Process.Run("24 32");//In this format, numbers must be space separated.
 
             //Hint: Use breakpoints to check the values of variables mid-runtime and keep checking the console.
         }
