@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using static RelativelyPrimeTester.Program;
 
@@ -17,19 +18,23 @@ namespace RelativelyPrimeTester
     {
         public static void Tester()
         {
-            //TODO: Edit the code here to test the Relatively Prime program for errors. There are a minimum number of errors you need to find.
+            // TODO: Edit the code here to test the Relatively Prime program for errors.
+            //  There are six different errors you can find, but you only need to find five.
 
-            ProcessResult example1 = Process.Run(24, 32);
-            ProcessResult example2 = Process.Run("24 32");//In this format, numbers must be space separated.
+            Result example1 = Process.Run(24, 32);
+            Result example2 = Process.Run("24 32");//In this format, numbers must be space separated.
 
-            //Hint: Use breakpoints to check the values of variables mid-runtime and keep checking the console.
+            // Hint: Use breakpoints to check the values of variables during runtime and keep checking the console.
         }
 
         public static void ExhaustiveTest()
         {
             int logicErrors = 0;
+            
+            Thread.Sleep(1200);
 
-            //TODO: Write your exhaustive test here. Don't worry about timing it, there are functions in place that will time it for you.
+            // TODO: Write your exhaustive test here.
+            // Don't worry about timing it, there are functions in place that will time it for you.
 
             Console.WriteLine("Logic errors found: " + logicErrors);
         }
