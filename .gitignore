@@ -1,5 +1,5 @@
-
-RelativelyPrimeTester/.vs/*
-RelativelyPrimeTester/RelativelyPrimeTester/bin/*
-RelativelyPrimeTester/RelativelyPrimeTester/obj/*
-.vscode/*
+.vs/
+RelativelyPrimeTester/bin/
+RelativelyPrimeTester/obj/
+.vscode/
+.idea/
