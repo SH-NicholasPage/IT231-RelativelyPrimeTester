@@ -14,7 +14,7 @@ using static RelativelyPrimeTester.Program;
 
 namespace RelativelyPrimeTester;
 
-// If using Linux, navigate to RealtvielyPrime/Linux and give the exe file execute permission.
+// If using Linux, navigate to RealtvielyPrime/Linux and give the "RelativelyPrime" file execute permission.
 //    If you've already built, do a clean build.
 
 public class Source
