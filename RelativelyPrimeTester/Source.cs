@@ -32,12 +32,12 @@ public class Source
 
     public static void ExhaustiveTest()
     {
-        int logicErrors = 0;
+        int logicErrors = 0; // Do not remove
 
         // TODO: Write your exhaustive test here.
         // Don't worry about timing it, there are functions in place that will time it for you.
 
-        Console.WriteLine("Logic errors found: " + logicErrors);
+        Console.WriteLine("Logic errors found: " + logicErrors); // Do not remove
     }
 }
 
