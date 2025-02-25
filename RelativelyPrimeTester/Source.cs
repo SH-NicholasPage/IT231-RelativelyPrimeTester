@@ -24,8 +24,11 @@ public class Source
         // TODO: Edit the code here to test the Relatively Prime program for errors.
         //  There are six different errors you can find, but you only need to find five.
 
+        // In this format, you can include as few or as many numbers as you like.
         Result example1 = Process.Run(24, 32);
-        Result example2 = Process.Run("24 32");//In this format, numbers must be space separated.
+        
+        // In this format, numbers must be space separated.
+        Result example2 = Process.Run("24 32");
 
         // Hint: Use breakpoints to check the values of variables during runtime and keep checking the console.
     }
