@@ -13,7 +13,7 @@ namespace RelativelyPrimeTester
 {
     public record Result(Program.ProcessResult ProcessResult, int? ExitCode);
     
-    public class Program
+    public static class Program
     {
         private static readonly int EXHAUSTIVE_CHECKS = 51;//51 to account for 0-50
         private static bool[] Crashes { get; } = new bool[0b0110];//Intentional abstraction

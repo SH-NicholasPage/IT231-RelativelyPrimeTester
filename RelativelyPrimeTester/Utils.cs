@@ -11,7 +11,7 @@ using static RelativelyPrimeTester.Program;
 
 namespace RelativelyPrimeTester
 {
-    public class Utils
+    public static class Utils
     {
         /// <summary>
         /// Accurately determines what is coprime and returns true if coprime, false if not coprime.
