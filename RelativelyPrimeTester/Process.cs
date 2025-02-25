@@ -9,51 +9,29 @@ using static RelativelyPrimeTester.Program;
 
 namespace RelativelyPrimeTester;
 
-public class Process
+public static class Process
 {
     //IO is VERY slow, so it's worth muting after enough runs, especially for the exhaustive check
     public const int MUTE_OUTPUT_AFTER_N_RUNS = 20;
     private static int processRan = 0;//Increases every time RunProcess is called
 
+    // You may read the code below, but it will not
+    //  provide additional insight for the assignment.
 
-    public static Result Run()
+    public static Result Run(params int?[] nums)
     {
-        return Run(null);
-    }
+        StringBuilder sb = new StringBuilder(String.Empty);
 
-    public static Result Run(int num1, int? num2 = null)
-    {
-        if (num2 == null)
+        foreach (int? n in nums)
         {
-            return Run(num1.ToString(), null);
-        }
-        else
-        {
-            return Run(num1.ToString(), num2.ToString());
-        }
-    }
-
-    public static Result Run(String? val1 = null, String? val2 = null)
-    {
-        if(val1 == null && val2 == null)
-        {
-            return Run(null);
-        }
-
-        StringBuilder sb = new StringBuilder();
-        if(val1 != null)
-        {
-            sb.Append(val1);
-        }
-
-        if(val1 != null && val2 != null)
-        {
-            sb.Append(' ');
-        }
-
-        if(val2 != null)
-        {
-            sb.Append(val2);
+            if (n == null)
+            {
+                sb.Append(String.Empty);
+            }
+            else
+            {
+                sb.Append(n.Value.ToString());
+            }
         }
 
         return Run(sb.ToString());
@@ -61,7 +39,7 @@ public class Process
 
     public static Result Run(String? val)
     {
-        List<String> args = new List<String>();
+        List<String> args = [];
 
         if (val != null)
         {
