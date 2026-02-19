@@ -30,11 +30,11 @@ public static class Process
             }
             else
             {
-                sb.Append(n.Value.ToString());
+                sb.Append(n.Value.ToString() + " ");
             }
         }
 
-        return Run(sb.ToString());
+        return Run(sb.ToString().Trim());
     }
 
     public static Result Run(String? val)
