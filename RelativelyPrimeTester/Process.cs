@@ -24,11 +24,7 @@ public static class Process
 
         foreach (int? n in nums)
         {
-            if (n == null)
-            {
-                sb.Append(String.Empty);
-            }
-            else
+            if (n != null)
             {
                 sb.Append(n.Value.ToString() + " ");
             }
